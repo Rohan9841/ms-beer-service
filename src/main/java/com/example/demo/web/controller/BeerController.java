@@ -32,7 +32,5 @@ public class BeerController {
 	public ResponseEntity<Void> updateBeerById(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto) {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
-	
 
 }
