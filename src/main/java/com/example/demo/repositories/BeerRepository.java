@@ -9,3 +9,4 @@ import com.example.demo.domain.Beer;
 public interface BeerRepository extends PagingAndSortingRepository<Beer, UUID>{
 	
 }
+ 
