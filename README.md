@@ -2,3 +2,5 @@
 # MSSC BEER SERVICE
 
 Spring Boot Microservice Example
+
+Added CircleCI
