@@ -33,6 +33,7 @@ import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StringUtils;
 
+import com.example.demo.bootstrap.BeerLoader;
 import com.example.demo.web.model.BeerDto;
 import com.example.demo.web.model.BeerStyleEnum;
 import com.example.demo.web.services.BeerService;
@@ -43,7 +44,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @AutoConfigureRestDocs
 @ComponentScan(basePackages = "com.example.demo.web.mappers")
 class BeerControllerTest {
-
+	
 	@Autowired
 	MockMvc mockMvc;
 
@@ -62,7 +63,7 @@ class BeerControllerTest {
 				.id(UUID.randomUUID())
 				.beerName("Beer1")
 				.beerStyle(BeerStyleEnum.ALE)
-				.upc(123123123L)
+				.upc(BeerLoader.BEER_1_UPC)
 				.price(new BigDecimal("12.95"))
 				.build();
 	}
@@ -97,6 +98,9 @@ class BeerControllerTest {
 	void testSaveNewBeer() throws Exception {
 		BeerDto beerDto = validBeer;
 		beerDto.setId(null);
+		
+		given(beerService.saveNewBeer(any())).willReturn(validBeer);
+		
 		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 		
 		ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
@@ -122,6 +126,9 @@ class BeerControllerTest {
 
 	@Test
 	void testUpdateBeerById() throws Exception {
+		
+		given(beerService.updateBeer(any(), any())).willReturn(validBeer);
+		
 		BeerDto beerDto = validBeer;
 		beerDto.setId(null);
 		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
