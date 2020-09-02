@@ -21,4 +21,10 @@ public class MvcExceptionHandler {
 		});
 		return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<String> handleNotFoundException(NotFoundException ex){
+		String error = ex.getStackTrace().toString();
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+	}
 }
