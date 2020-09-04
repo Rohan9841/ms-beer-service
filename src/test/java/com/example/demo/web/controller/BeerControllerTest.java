@@ -33,7 +33,7 @@ import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StringUtils;
 
-import com.example.demo.bootstrap.BeerLoader;
+//import com.example.demo.bootstrap.BeerLoader;
 import com.example.demo.web.model.BeerDto;
 import com.example.demo.web.model.BeerStyleEnum;
 import com.example.demo.web.services.BeerService;
@@ -63,7 +63,7 @@ class BeerControllerTest {
 				.id(UUID.randomUUID())
 				.beerName("Beer1")
 				.beerStyle(BeerStyleEnum.ALE)
-				.upc(BeerLoader.BEER_1_UPC)
+				.upc("0631234200036")
 				.price(new BigDecimal("12.95"))
 				.build();
 	}
