@@ -1,6 +1,7 @@
 package com.example.demo.web.controller;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
@@ -70,7 +71,7 @@ class BeerControllerTest {
 
 	@Test
 	void testGetBeerById() throws Exception {
-		given(beerService.getBeerById(any(UUID.class))).willReturn(validBeer);
+		given(beerService.getBeerById(any(UUID.class),anyBoolean())).willReturn(validBeer);
 		ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
 		mockMvc.perform(get("/api/v1/beer/{beerId}", validBeer.getId().toString())
 				.accept(MediaType.APPLICATION_JSON))
