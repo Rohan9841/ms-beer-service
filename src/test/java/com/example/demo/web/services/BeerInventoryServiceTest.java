@@ -1,12 +1,14 @@
 package com.example.demo.web.services;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.bootstrap.BeerLoader;
 
+@Disabled
 @SpringBootTest
 class BeerInventoryServiceTest {
 
