@@ -1,5 +1,6 @@
 package com.example.demo.web.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.data.domain.PageImpl;
@@ -10,14 +11,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 
-public class BeerPagedList extends PageImpl<BeerDto>{
+public class BeerPagedList extends PageImpl<BeerDto> implements Serializable{
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8634345157200389005L;
 
-    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public BeerPagedList(@JsonProperty("content") List<BeerDto> content,
                          @JsonProperty("number") int number,
                          @JsonProperty("size") int size,

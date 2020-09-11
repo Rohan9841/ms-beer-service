@@ -1,5 +1,6 @@
 package com.example.demo.web.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -20,8 +21,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDto {
+public class BeerDto implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4461111650347229720L;
+
 	@Null
 	UUID id;
 	

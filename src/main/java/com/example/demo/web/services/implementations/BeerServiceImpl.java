@@ -3,6 +3,7 @@ package com.example.demo.web.services.implementations;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -25,11 +26,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class BeerServiceImpl implements BeerService {
 
+	//@RequiredArgsConstructor will create a constructor with these fields as paramenter
+	//which will autowire automatically
 	private final BeerRepository beerRepository;
 	private final BeerMapper beerMapper;
 
+	@Cacheable(cacheNames = "beerListCache", condition="#showInventoryOnHand == false")
 	@Override
 	public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
+		System.out.println("I have been called");
 		BeerPagedList beerPagedList;
 		Page<Beer> beerPage;
 
@@ -71,8 +76,10 @@ public class BeerServiceImpl implements BeerService {
 
 	}
 
+	@Cacheable(cacheNames = "beerCache", key = "#beerId", condition="#showInventoryOnHand == false")
 	@Override
 	public BeerDto getBeerById(UUID beerId, Boolean showInventoryOnHand) {
+		System.out.println("I was called.");
 		Beer beer = beerRepository.findById(beerId).orElseThrow(NotFoundException::new);
 		if(showInventoryOnHand) return beerMapper.beerToBeerDtoWithInventory(beer);
 		else return beerMapper.beerToBeerDto(beer);
